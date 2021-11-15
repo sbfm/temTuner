@@ -1,0 +1,38 @@
+<% //for (var i = 1; i <= 8; i++) { %>
+<p>名前</p>
+<select name="name" id="name33">
+  <%- include('_namelist.ejs') %>
+</select>
+<p>特性</p>
+<select name="kibun">
+  <option value="saikou">めちゃいい！！</option>
+</select>
+<% for (var j = 0; j < 4; j++) { %>
+  <p>わざ</p>
+  <select name="kibun<%= j %>" id="kibun<%= j %>">
+    <option value="saikou">めちゃいい！！</option>
+  </select>
+<% } %>
+<p>道具</p>
+<select name="kibun">
+  <option value="saikou">めちゃいい！！</option>
+</select>
+<p>lv</p>
+<input type="text" />
+<!-- ステータス表示 -->
+<table>
+  <tr>
+    <td></td><td>BV</td><td>SV</td><td>TV</td><td>Total</td>
+  </tr>
+  <% var trate= ["HP","STA","SPD","ATK","DEF","SPATK","SPDEF"]; %>
+  <% for (var j = 0; j < 7; j++) { %>
+    <tr>
+      <td><%= trate[j] %></td>
+      <td><input type="text" /></td>
+      <td>50</td>
+      <td>0</td>
+      <td>100</td>
+    </tr>
+  <% } %>
+  </table>
+<% //} %>
