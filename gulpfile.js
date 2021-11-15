@@ -33,12 +33,12 @@ var connect = require('gulp-connect');
  * sassタスク(cssは埋め込むため一時ファイルに保存
  */
 gulp.task( 'sass', function(){
-	// del([dirtempoutput + '/css/**/*'],{force: true});
-	return gulp.src([dir + ('/sass/style.scss')])
-		.pipe(plumber())
-		.pipe(sassGlob())
-		.pipe(sass({outputStyle: 'expanded'}))
-		.pipe(gulp.dest(dirtempoutput + '/css'));
+  // del([dirtempoutput + '/css/**/*'],{force: true});
+  return gulp.src([dir + ('/sass/style.scss')])
+    .pipe(plumber())
+    .pipe(sassGlob())
+    .pipe(sass({outputStyle: 'expanded'}))
+    .pipe(gulp.dest(dirtempoutput));
 });
 
 /*
@@ -48,9 +48,9 @@ gulp.task( 'js', function(){
   //del([diroutput + '/js/**/*'],{force: true});
   return gulp.src([dir + '/js/*.js'])
   .pipe(jimport())
-  .pipe(browserify())
   .pipe(plumber())
   .pipe(concat('script.js'))
+  .pipe(browserify())
   //.pipe(uglify({
   //        output:{
   //          comments: /^!/ //正規表現でLicenseコメントの頭によくある/*!を検出
@@ -94,21 +94,6 @@ const server = (cb) => {
   });
   open("http" + (webserver.https? 's':'') + "://" + webserver.host + ":" + webserver.port);
 };
-// sanpuru
-//gulp.task('connect', function() {
-//  connect.server({
-//    root: './dest',
-//    livereload: true
-//  });
-//});
-//gulp.task('html', function () {
-//  gulp.src('./*.html')
-//    .pipe(connect.reload());
-//});
-//gulp.task('watch', function () {
-//  gulp.watch(['./*.html'], ['html']);
-//});
-
 
 
 /*
@@ -116,7 +101,10 @@ const server = (cb) => {
  */
 //gulp.task( 'build', gulp.series('sass', 'ejs', 'js', function(done){done();}));
 //gulp.task( 'build', gulp.series('sass', 'ejs', 'include', 'js', function(done){done();}));
-gulp.task( 'build', gulp.series('sass', 'ejs', 'include', "js", function(done){done();}, server));
+// ブラウザでの確認を含む
+gulp.task( 'test', gulp.series('sass', 'ejs', 'include', "js", function(done){done();}, server));
+// ビルド
+gulp.task( 'build', gulp.series('sass', 'ejs', 'include', "js", function(done){done();}));
 
 
 
