@@ -1,5 +1,6 @@
-@import './lib/td.js'
-@import './lib/tld.js'
+@import './data/td.js'
+@import './data/tld.js'
+@import './data/ts.js'
 
 // td:テクニックリスト
 // tld:覚えるテクニックリスト[図鑑][0-]
@@ -14,14 +15,6 @@ function setTechnique(no,forum) {
     sl = document.getElementById('kibun' + i);
     while(sl.lastChild) { sl.removeChild(sl.lastChild); }
   }
-  // そもそも初期データのjsいじればこれいらないのでは？
-  let op = document.createElement("option");
-  op.value = "";  // 特技の管理キー名
-  op.text = "-----";   //0:技名
-  document.getElementById("kibun0").appendChild(op.cloneNode(true));
-  document.getElementById("kibun1").appendChild(op.cloneNode(true));
-  document.getElementById("kibun2").appendChild(op.cloneNode(true));
-  document.getElementById("kibun3").appendChild(op.cloneNode(true));
   // 要素の追加
   for(var i=0; i<tld[no][forum].length; i++){
     let op = document.createElement("option");
@@ -33,6 +26,50 @@ function setTechnique(no,forum) {
     document.getElementById("kibun3").appendChild(op.cloneNode(true));
   }
 }
+
+function resetCard() {
+  // 要素の追加
+  document.getElementById("lv").value = "72";
+  for(var i=0; i<7; i++) {
+    document.getElementById("sv_" + String(i)).value = "50";
+    document.getElementById("tv_" + String(i)).value = "0";
+  }
+}
+//BSの更新
+function setBaseStatus(no) {
+  // 要素の追加
+  for(var i=0; i<7; i++) {
+    // forum追加されたとき用の拡張で０をいれてる
+    document.getElementById("bs_" + String(i)).innerHTML = ts[no][0][i];
+  }
+}
+
+function upDateTotal(){
+  var lv = document.getElementById("lv").value;
+  for(var i=0; i<7; i++) {
+    var bs = document.getElementById("bs_" + String(i)).innerHTML;
+    var sv = document.getElementById("sv_" + String(i)).value;
+    var tv = document.getElementById("tv_" + String(i)).value;
+    var to = "--";
+    // 未設定時は計算しない
+    if(bs != "--"){
+      try {
+        if(i==0){
+          to = CalcHpStats (Number(lv),Number(bs),Number(sv),Number(tv));
+        } else if(i==1){;
+          to = CalcStaStats (Number(lv),Number(bs),Number(sv),Number(tv));
+        } else {
+          to = CalcStats (Number(lv),Number(bs),Number(sv),Number(tv));
+        }
+      } catch (error) {
+        to = "--";
+      }
+    }else {
+      to = "--";
+    }
+    document.getElementById("to_" + String(i)).innerHTML = to;
+  }
+}
 // -----------------------
 // 更新されたときの処理
 // -----------------------
@@ -41,12 +78,21 @@ function inputChange(event) {
   // テクニックリストを更新する
   setTechnique(zukanNo, 0);
   //道具のリセット【未実装】
-  //レベルのリセット【未実装】
-  //SVのリセット【未実装】
-  //TVのリセット【未実装】
-  //BSの更新【未実装】
+  //レベルとSVとTVのリセット
+  resetCard();
+  //BSの更新
+  setBaseStatus(zukanNo);
   //totalの計算しなおし？
+  upDateTotal();
+  //alert(CalcHpStats(72,100,100,100));
 }
 // 名前変更を感知する
 let text = document.getElementById('name33');
 text.addEventListener('change', inputChange);
+
+document.getElementById('lv').addEventListener('change', upDateTotal);
+for(var i=0; i<7; i++){
+  document.getElementById('tv_' + String(i)).addEventListener('change', upDateTotal);
+  document.getElementById('sv_' + String(i)).addEventListener('change', upDateTotal);
+}
+

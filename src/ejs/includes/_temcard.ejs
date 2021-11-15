@@ -1,37 +1,38 @@
 <% //for (var i = 1; i <= 8; i++) { %>
 <p>名前</p>
 <select name="name" id="name33">
-  <%- include('_namelist.ejs') %>
+  <%- include('data/_namelist.ejs') %>
 </select>
 <p>特性</p>
 <select name="kibun">
-  <option value="saikou">めちゃいい！！</option>
+  <option value="-----">-----</option>
 </select>
 <% for (var j = 0; j < 4; j++) { %>
   <p>わざ</p>
   <select name="kibun<%= j %>" id="kibun<%= j %>">
-    <option value="saikou">めちゃいい！！</option>
+    <option value="0">-----</option>
   </select>
 <% } %>
 <p>道具</p>
 <select name="kibun">
-  <option value="saikou">めちゃいい！！</option>
+  <option value="saikou">-----</option>
 </select>
 <p>lv</p>
-<input type="text" />
+<input type="text" id="lv" value="72" />
 <!-- ステータス表示 -->
 <table>
   <tr>
-    <td></td><td>BV</td><td>SV</td><td>TV</td><td>Total</td>
+    <td></td><td>BS</td><td>SV</td><td>TV</td><td>Total</td>
   </tr>
   <% var trate= ["HP","STA","SPD","ATK","DEF","SPATK","SPDEF"]; %>
   <% for (var j = 0; j < 7; j++) { %>
     <tr>
       <td><%= trate[j] %></td>
-      <td><input type="text" /></td>
-      <td>50</td>
-      <td>0</td>
-      <td>100</td>
+      <!-- 基礎ステータス -->
+      <td id="bs_<%= j %>">--</td>
+      <td><input type="text" id="sv_<%= j %>" value="50" /></td>
+      <td><input type="text" id="tv_<%= j %>" value="0" /></td>
+      <td id="to_<%= j %>">100</td>
     </tr>
   <% } %>
   </table>
