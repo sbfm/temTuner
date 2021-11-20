@@ -1,5 +1,7 @@
 @import './data/td.js'
 @import './data/tld.js'
+@import './data/tll.js'
+@import './data/trl.js'
 @import './data/ts.js'
 
 // td:テクニックリスト
@@ -43,6 +45,18 @@ function setBaseStatus(no) {
     document.getElementById("bs_" + String(i)).innerHTML = ts[no][0][i];
   }
 }
+function upDateTrate(no){
+  // 要素の削除
+  tl = document.getElementById('trate');
+  while(tl.lastChild) { tl.removeChild(tl.lastChild); }
+  // 要素の追加
+  for(var i=0; i < tll[no].length; i++) {
+    let op = document.createElement("option");
+    op.value = tll[no][i]; // 個性のキー名
+    op.text = trl[tll[no][i]][0]; // 個性名
+    document.getElementById("trate").appendChild(op.cloneNode(true));
+  }
+}
 
 function upDateTotal(){
   var lv = document.getElementById("lv").value;
@@ -71,7 +85,7 @@ function upDateTotal(){
   }
 }
 // -----------------------
-// 更新されたときの処理
+// temtemが更新されたときの処理
 // -----------------------
 function inputChange(event) {
   let zukanNo = event.currentTarget.value;
@@ -85,6 +99,8 @@ function inputChange(event) {
   //totalの計算しなおし？
   upDateTotal();
   //alert(CalcHpStats(72,100,100,100));
+  // 個性リストの更新
+  upDateTrate(zukanNo);
 }
 // 名前変更を感知する
 let text = document.getElementById('name33');

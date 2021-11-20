@@ -4,7 +4,7 @@
   <%- include('data/_namelist.ejs') %>
 </select>
 <p>特性</p>
-<select name="kibun">
+<select name="trate" id="trate">
   <option value="-----">-----</option>
 </select>
 <% for (var j = 0; j < 4; j++) { %>
@@ -30,8 +30,8 @@
       <td><%= trate[j] %></td>
       <!-- 基礎ステータス -->
       <td id="bs_<%= j %>">--</td>
-      <td><input type="text" id="sv_<%= j %>" value="50" /></td>
-      <td><input type="text" id="tv_<%= j %>" value="0" /></td>
+      <td><input class="form-3mozi" type="text" id="sv_<%= j %>" value="50" /></td>
+      <td><input class="form-3mozi" type="text" id="tv_<%= j %>" value="0" /></td>
       <td id="to_<%= j %>">100</td>
     </tr>
   <% } %>
