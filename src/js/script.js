@@ -134,6 +134,7 @@ function inputChange(event) {
   }
   // 翻訳の設定を与える
   changeLangage(document.getElementById("lang").value, "_" + team)
+  document.getElementById("lang").addEventListener('change', changeNameTrigger);
 }
 
 // ----------------------

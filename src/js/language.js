@@ -1,5 +1,6 @@
 
 function setViewText(id,cKey) {
+  console.log(cKey);
 // どこになにを ckeyはもげ
   var nameset = document.getElementById(id);
   // すべてのキーを確認
@@ -29,19 +30,26 @@ function changename(lang, columntail) {
 }
 // 言語を変更するやつ
 function changetechnic(lang, columntail) {
+  // lang: 言語
+  // columntail :チームのテムテムを識別する番号
+  //
   tail = "";
   if(lang == "JP") {
     tail = "_j";
-    setViewText("kibun" + columntail + "_0", eval("td" + tail));
+    for(var i=0 ;i < 4;i++) {
+      setViewText("kibun_" + String(i) + columntail, eval("td" + tail));
+    }
   } else {
     // その他の場合default
-    data = [];
+    data = {};
     for (let i in td){
       if (i != "0"){
-        data.append([i,td[1]]);
+        data[i] = td[i][0];
       }
     }
-    setViewText("kibun" + columntail + "_0", data);
+    for(var i = 0;i < 4;i++) {
+      setViewText("kibun_" + String(i) + columntail, data);
+    }
   }
   // 日本語に変更
   // 名前
