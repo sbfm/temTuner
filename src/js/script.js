@@ -1,9 +1,12 @@
 @import './data/td.js'
+@import './data/tdj.js'
 @import './data/tld.js'
 @import './data/tll.js'
 @import './data/trl.js'
 @import './data/ts.js'
 @import './data/ti.js'
+@import './data/tnj.js'
+@import './data/tn.js'
 
 // td:テクニックリスト
 // tld:覚えるテクニックリスト[図鑑][0-]
@@ -129,16 +132,21 @@ function inputChange(event) {
       state.selected = false;
     }
   }
+  // 翻訳の設定を与える
+  changeLangage(document.getElementById("lang").value, "_" + team)
 }
 
 // ----------------------
-// 名前変更を感知する
+// 情報変更を感知する
 // ----------------------
 for(var team=0; team<8; team++){
+  // 名前変更を感知
   let text = document.getElementById('name33' + "_" + team);
   text.addEventListener('change', inputChange);
+  // ステータス変更を感知
   text.eventParam = team;
   document.getElementById('lv' + "_" + team).addEventListener('change', upDateTotalliss);
+  document.getElementById('lv' + "_" + team).eventParam = team;
   document.getElementById('lv' + "_" + team).eventParam = team;
   // ステータスの
   for(var i=0; i<7; i++){
@@ -150,5 +158,6 @@ for(var team=0; team<8; team++){
   // 初回起動
   setItem(team);
 }
+document.getElementById("lang").addEventListener('change', changeNamelistener);
 
 
