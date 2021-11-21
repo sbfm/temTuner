@@ -1,24 +1,33 @@
-<% //for (var i = 1; i <= 8; i++) { %>
+<div>1匹目</div>
+<div>2匹目</div>
+<div>3匹目</div>
+<div>4匹目</div>
+<div>5匹目</div>
+<div>6匹目</div>
+<div>7匹目</div>
+<div>8匹目</div>
+<div class="cardbox">
+<% for (var i = 0; i < 8; i++) { %>
+<div class="card">
 <p>名前</p>
-<select name="name" id="name33">
+<select name="name" id="name33_<%= i %>">
   <%- include('data/_namelist.ejs') %>
 </select>
 <p>特性</p>
-<select name="trate" id="trate">
+<select name="trate" id="trate_<%= i %>">
   <option value="-----">-----</option>
 </select>
 <% for (var j = 0; j < 4; j++) { %>
   <p>わざ</p>
-  <select name="kibun<%= j %>" id="kibun<%= j %>">
+  <select name="kibun<%= j %>" id="kibun_<%= j %>_<%= i %>">
     <option value="0">-----</option>
   </select>
 <% } %>
 <p>道具</p>
-<select name="kibun">
-  <option value="saikou">-----</option>
+<select name="item" id="item_<%= i %>">
 </select>
 <p>lv</p>
-<input type="text" id="lv" value="72" />
+<input type="text" id="lv_<%= i %>" value="72" />
 <!-- ステータス表示 -->
 <table>
   <tr>
@@ -29,11 +38,13 @@
     <tr>
       <td><%= trate[j] %></td>
       <!-- 基礎ステータス -->
-      <td id="bs_<%= j %>">--</td>
-      <td><input class="form-3mozi" type="text" id="sv_<%= j %>" value="50" /></td>
-      <td><input class="form-3mozi" type="text" id="tv_<%= j %>" value="0" /></td>
-      <td id="to_<%= j %>">100</td>
+      <td id="bs_<%= j %>_<%= i %>">--</td>
+      <td><input class="form-3mozi" type="text" id="sv_<%= j %>_<%= i %>" value="50" /></td>
+      <td><input class="form-3mozi" type="text" id="tv_<%= j %>_<%= i %>" value="0" /></td>
+      <td id="to_<%= j %>_<%= i %>">100</td>
     </tr>
   <% } %>
-  </table>
-<% //} %>
+</table>
+</div>
+<% } %>
+</div>
