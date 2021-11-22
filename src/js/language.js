@@ -1,6 +1,5 @@
 
 function setViewText(id,cKey) {
-  console.log(cKey);
 // どこになにを ckeyはもげ
   var nameset = document.getElementById(id);
   // すべてのキーを確認
@@ -54,9 +53,47 @@ function changetechnic(lang, columntail) {
   // 日本語に変更
   // 名前
 }
+// 言語を変更するやつ
+function changetrate(lang, columntail) {
+  tail = "";
+  if(lang == "JP") {
+    tail = "_j";
+    setViewText("trate" + columntail, eval("trl" + tail));
+  } else {
+    var data = [];
+    for (let i in trl){
+      if (i != 0){
+        data[i] = trl[i][0];
+      }
+    }
+    setViewText("trate" + columntail, data);
+  }
+  // 日本語に変更
+  // 名前
+}
+// 言語を変更するやつ
+function changeitem(lang, columntail) {
+  tail = "";
+  if(lang == "JP") {
+    tail = "_j";
+    setViewText("item" + columntail, eval("ti" + tail));
+  } else {
+    var data = [];
+    for (let i in ti){
+      if (i != 0){
+        data[i] = ti[i][0];
+      }
+    }
+    setViewText("item" + columntail, data);
+  }
+  // 日本語に変更
+  // 名前
+}
 function changeLangage(lang, tail){
     changename(lang, tail);
     changetechnic(lang, tail);
+    changetrate(lang, tail);
+    changeitem(lang, tail);
 }
 // リスナー登録用
 function changeNamelistener(event) {

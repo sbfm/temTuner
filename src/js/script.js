@@ -5,8 +5,10 @@
 @import './data/trl.js'
 @import './data/ts.js'
 @import './data/ti.js'
+@import './data/tij.js'
 @import './data/tnj.js'
 @import './data/tn.js'
+@import './data/ttj.js'
 
 // td:テクニックリスト
 // tld:覚えるテクニックリスト[図鑑][0-]
@@ -134,7 +136,7 @@ function inputChange(event) {
   }
   // 翻訳の設定を与える
   changeLangage(document.getElementById("lang").value, "_" + team)
-  document.getElementById("lang").addEventListener('change', changeNameTrigger);
+  //document.getElementById("lang").addEventListener('change', changeNameTrigger);
 }
 
 // ----------------------
