@@ -1,13 +1,13 @@
 @import './data/td.js'
-@import './data/tdj.js'
 @import './data/tld.js'
 @import './data/tll.js'
 @import './data/trl.js'
 @import './data/ts.js'
 @import './data/ti.js'
+@import './data/tn.js'
+@import './data/tdj.js'
 @import './data/tij.js'
 @import './data/tnj.js'
-@import './data/tn.js'
 @import './data/ttj.js'
 
 // td:テクニックリスト
