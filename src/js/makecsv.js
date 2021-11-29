@@ -1,6 +1,7 @@
 
 //const typeNameList = ["中立","風","地面","水","炎","みどり","電気","精神","デジタル","格闘","クリスタル","どく"];
 let typech = { none:0, Neutral:1, Wind:2, Earth:3, Water:4, Fire:5, Nature:6, Electric:7, Mental:8, Digital:9, Melee:10, Crystal:11, Toxic:12 };
+let categoryList = {"Physical":0,"Special":1,"Status":2};
 function makeCSV() {
   csv = {version:2, monster:[], uiText:{}, option:{}};
 
@@ -8,10 +9,8 @@ function makeCSV() {
     // 事前操作
     var nameid = document.getElementById("name33_" + String(i)).value;
     var name = nameid == "0" ? "":tn[String(nameid)];
-    //var type1 = nameid == "0" ? 0:tn[String(nameid)];
-    //var type2 = nameid == "0" ? 0:tn[String(nameid)];
-    var type1 = 3; //名前と属性を紐付けるものがない
-    var type2 = 4;
+    var type1 = nameid == "0" ? 0:typech[typelist[String(nameid)][0]];
+    var type2 = nameid == "0" ? 0:typech[typelist[String(nameid)][1]];
     var lv = document.getElementById("lv_" + String(i)).value;
     var tnameid = document.getElementById("trate_" + String(i)).value;
     var tname = (tnameid == "-----" ? "":trl[tnameid][0][0]);
@@ -65,9 +64,10 @@ function makeCSV() {
     // ------------------
     for(var j=0; j < 4; j++) {
       var teid = document.getElementById("kibun_" + String(j) + "_" + String(i)).value;
-      var trigger = td[teid][9]!="" ? 0:"" ;// タイプの数値化するまで仮
+      var trigger = td[teid][11]!="" ? typech[td[teid][10]]:"" ;
       var name = td[teid][0];
       var type = td[teid][2] == "" ? 0 : typech[td[teid][2]];
+      var category = type == 0 ? 0:categoryList[td[teid][3]];// カテゴリーないときどうするかtodo
       var wait = td[teid][6];
       var priority = td[teid][7];
       var pow = td[teid][4];
@@ -75,6 +75,7 @@ function makeCSV() {
       var text = td[teid][1];
       var sname = trigger != "" ? td[teid][0] + "+" : "";
       var stype = td[teid][12] == "" ? 0 : typech[td[teid][12]];
+      var scategory = stype == 0 ? 0:categoryList[td[teid][13]];// カテゴリーないときどうするかtodo
       var swait = trigger != "" ? td[teid][16]:"";
       var spriority = trigger != "" ? td[teid][17]:"";
       var spow = trigger != "" ? td[teid][14]:"";
@@ -85,7 +86,7 @@ function makeCSV() {
         nosynergy:{
           name:name,
           type:type,
-          category:"",
+          category:category,
           wait:wait,
           priority:priority,
           pow:pow,
@@ -95,7 +96,7 @@ function makeCSV() {
         synergy:{
           name:sname,
           type:stype,
-          category:"",
+          category:scategory,
           wait:swait,
           priority:spriority,
           pow:spow,

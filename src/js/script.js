@@ -9,6 +9,7 @@
 @import './data/tij.js'
 @import './data/tnj.js'
 @import './data/ttj.js'
+@import './data/type.js'
 
 // td:テクニックリスト
 // tld:覚えるテクニックリスト[図鑑][0-]
@@ -17,7 +18,7 @@
 // 名称・タイプ・ダメージ・STAコスト・ホールド・プライオリティ・ターゲット・追加効果
 // Synergy タイプ　ダメージ　コスト　ホールド　プライオリティ　ターゲット　Effects
 
-function setTechnique(no,forum,team) {
+function updateTechnique(no,forum,team) {
   // 要素の削除
   for(var i=0; i<4; i++){
     sl = document.getElementById('kibun' + "_" + i + "_" + team);
@@ -34,7 +35,22 @@ function setTechnique(no,forum,team) {
     document.getElementById("kibun_3" + "_" + team).appendChild(op.cloneNode(true));
   }
 }
-
+function setKey(name,team,id) {
+  let list = document.getElementById(name + "_" + team);
+  for(var sel of list) {
+    if(sel.value == id){
+      sel.selected = true;
+    }
+  }
+}
+function setKeylow(name,team,id) {
+  let list = document.getElementById(name + "_" + team);
+  for(var sel of list) {
+    if(sel.value.replace('_','').toLowerCase() == id.replace('_','').toLowerCase()){
+      sel.selected = true;
+    }
+  }
+}
 // lv sv tv要素のリセット
 function resetCard(team) {
   // 要素の追加
@@ -45,7 +61,7 @@ function resetCard(team) {
   }
 }
 //BSの更新
-function setBaseStatus(no,team) {
+function updateBaseStatus(no,team) {
   // 要素の追加
   for(var i=0; i<7; i++) {
     // forum追加されたとき用の拡張で０をいれてる
@@ -53,7 +69,7 @@ function setBaseStatus(no,team) {
   }
 }
 
-function setItem(team){
+function updateItem(team){
   // 要素の削除
   for (let key in ti) {
     let op = document.createElement("option");
@@ -107,19 +123,14 @@ function upDateTotalliss(event){
   let team = event.target.eventParam;
   upDateTotal(team)
 }
-// -----------------------
-// temtemが更新されたときの処理
-// -----------------------
-function inputChange(event) {
-  let team= event.target.eventParam;
-  let zukanNo = event.currentTarget.value;
+function inputChangeName(team,zukanNo){
   // テクニックリストを更新する
-  setTechnique(zukanNo, 0, team);
+  updateTechnique(zukanNo, 0, team);
   //道具のリセット【未実装】
   //レベルとSVとTVのリセット
   resetCard(team);
   //BSの更新
-  setBaseStatus(zukanNo,team);
+  updateBaseStatus(zukanNo,team);
   //totalの計算しなおし？
   upDateTotal(team);
   //alert(CalcHpStats(72,100,100,100));
@@ -137,6 +148,12 @@ function inputChange(event) {
   // 翻訳の設定を与える
   changeLangage(document.getElementById("lang").value, "_" + team)
   //document.getElementById("lang").addEventListener('change', changeNameTrigger);
+}
+// -----------------------
+// temtemが更新されたときの処理
+// -----------------------
+function inputChange(event) {
+  inputChangeName(event.target.eventParam, event.currentTarget.value);
 }
 
 // ----------------------
@@ -159,7 +176,7 @@ for(var team=0; team<8; team++){
     document.getElementById('sv_' + String(i) + "_" + team).eventParam = team;
   }
   // 初回起動
-  setItem(team);
+  updateItem(team);
 }
 document.getElementById("lang").addEventListener('change', changeNamelistener);
 
