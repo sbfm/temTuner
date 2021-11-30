@@ -51,11 +51,11 @@ gulp.task( 'js', function(){
   .pipe(plumber())
   .pipe(concat('script.js'))
   .pipe(browserify())
-  //.pipe(uglify({
-  //        output:{
-  //          comments: /^!/ //正規表現でLicenseコメントの頭によくある/*!を検出
-  //        }
-  //      }))
+  .pipe(uglify({
+          output:{
+            comments: /^!/ //正規表現でLicenseコメントの頭によくある/*!を検出
+          }
+        }))
   .pipe(gulp.dest(diroutput + '/'));
 });
 

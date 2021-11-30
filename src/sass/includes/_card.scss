@@ -1,10 +1,35 @@
 // フォームの大きさ
-.form-3mozi{
-  width:30px;
-}
-.card {
-  width:300px;
-}
 .cardbox {
   display: flex;
+  .card {
+    width:300px;
+    .form-3mozi{
+      width:30px;
+    }
+  }
 }
+.hiddencard {
+  display: none;
+}
+// メンバーセレクトするメニュー
+#memberselect {
+  list-style: none;
+  display: flex;
+  li {
+    width: 140px;
+    text-align: center;
+    background-color: #333;
+    height: 50px;
+    line-height: 50px;
+    margin-right: 2px;
+    color: #fff;
+    a {
+      // いまのところリンクにはしない予定
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      padding: 20px;
+    }
+  }
+}
+ 

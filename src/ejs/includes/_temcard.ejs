@@ -1,66 +1,63 @@
-<div>1匹目</div>
-<div>2匹目</div>
-<div>3匹目</div>
-<div>4匹目</div>
-<div>5匹目</div>
-<div>6匹目</div>
-<div>7匹目</div>
-<div>8匹目</div>
-<div class="cardbox">
-<% for (var i = 0; i < 8; i++) { %>
-<div class="card">
-<p>名前</p>
-<select name="name" id="name33_<%= i %>">
-  <%- include('data/_namelist.ejs') %>
-</select>
-<p>特性</p>
-<select name="trate" id="trate_<%= i %>">
-  <option value="-----">-----</option>
-</select>
-<% for (var j = 0; j < 4; j++) { %>
-  <p>わざ</p>
-  <select name="kibun<%= j %>" id="kibun_<%= j %>_<%= i %>">
-    <option value="0">-----</option>
-  </select>
-<% } %>
-<p>道具</p>
-<select name="item" id="item_<%= i %>">
-</select>
-<p>lv</p>
-<input type="text" id="lv_<%= i %>" value="72" />
-<!-- ステータス表示 -->
-<table>
-  <tr>
-    <td></td><td>BS</td><td>SV</td><td>TV</td><td>Total</td>
-  </tr>
-  <% var trate= ["HP","STA","SPD","ATK","DEF","SPATK","SPDEF"]; %>
-  <% for (var j = 0; j < 7; j++) { %>
-    <tr>
-      <td><%= trate[j] %></td>
-      <!-- 基礎ステータス -->
-      <td id="bs_<%= j %>_<%= i %>">--</td>
-      <td><input class="form-3mozi" type="text" id="sv_<%= j %>_<%= i %>" value="50" /></td>
-      <td><input class="form-3mozi" type="text" id="tv_<%= j %>_<%= i %>" value="0" /></td>
-      <td id="to_<%= j %>_<%= i %>">100</td>
-    </tr>
-  <% } %>
-</table>
-</div>
-<% } %>
-</div>
-<hr>
-<div>
-  <article id="content1">
-    <h1>Status画面(フルHD/英語のみ)</h1>
-    <form method="post" action="" enctype="multipart/form-data">
-      <input type="file" id="img_file" name="img_file">
-    </form>
-  </article>
-</div>
 <div>
   <p>langage/言語</p>
   <select id="lang">
     <option value="ENG">English</option>
     <option value="JP">日本語</option>
   </select>
+</div>
+<ul id="memberselect">
+<% for (var i = 0; i < 8; i++) { %>
+  <li class="number-btn"><%= i+1 %></li>
+<% } %>
+</ul>
+<div class="cardbox">
+<% for (var i = 0; i < 8; i++) { %>
+  <div class="card<% if(i!=0) { %> hiddencard<% } %>">
+  <p>Name</p>
+  <select name="name" id="name33_<%= i %>">
+    <%- include('data/_namelist.ejs') %>
+  </select>
+  <p>Trate</p>
+  <select name="trate" id="trate_<%= i %>">
+    <option value="-----">-----</option>
+  </select>
+  <% for (var j = 0; j < 4; j++) { %>
+    <p>わざ</p>
+    <select name="kibun<%= j %>" id="kibun_<%= j %>_<%= i %>">
+      <option value="0">-----</option>
+    </select>
+  <% } %>
+  <p>Item</p>
+  <select name="item" id="item_<%= i %>">
+  </select>
+  <p>lv</p>
+  <input type="text" id="lv_<%= i %>" value="72" />
+  <!-- ステータス表示 -->
+  <table>
+    <tr>
+      <td></td><td>BS</td><td>SV</td><td>TV</td><td>Total</td>
+    </tr>
+    <% var trate= ["HP","STA","SPD","ATK","DEF","SPATK","SPDEF"]; %>
+    <% for (var j = 0; j < 7; j++) { %>
+      <tr>
+        <td><%= trate[j] %></td>
+        <!-- 基礎ステータス -->
+        <td id="bs_<%= j %>_<%= i %>">--</td>
+        <td><input class="form-3mozi" type="text" id="sv_<%= j %>_<%= i %>" value="50" /></td>
+        <td><input class="form-3mozi" type="text" id="tv_<%= j %>_<%= i %>" value="0" /></td>
+        <td id="to_<%= j %>_<%= i %>">100</td>
+      </tr>
+    <% } %>
+  </table>
+  </div>
+<% } %>
+</div>
+<hr>
+<div>
+  <article id="content1">
+    <h1>ステータス画面のスクショから登録(Full HDかつEnglishのみ)</h1>
+    <form method="post" action="" enctype="multipart/form-data">
+      <input type="file" id="img_file" name="img_file">
+    </form>
+  </article>
 </div>

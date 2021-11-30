@@ -126,14 +126,12 @@ function upDateTotalliss(event){
 function inputChangeName(team,zukanNo){
   // テクニックリストを更新する
   updateTechnique(zukanNo, 0, team);
-  //道具のリセット【未実装】
   //レベルとSVとTVのリセット
   resetCard(team);
   //BSの更新
   updateBaseStatus(zukanNo,team);
   //totalの計算しなおし？
   upDateTotal(team);
-  //alert(CalcHpStats(72,100,100,100));
   // 個性リストの更新
   upDateTrate(zukanNo,team);
   // アイテムの設定をリセット
