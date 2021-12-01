@@ -21,8 +21,23 @@ window.addEventListener('DOMContentLoaded', function(){
       const result = JSON.parse(xhr.response);
       // 図鑑の更新
       setKey('name33',team,result["no"]);
+      // forumの更新
+      setFolum(result["no"],team);
+      if (result["no"] == 4) { 
+        for (var i=0; i<chrome.length; i++) {
+          if(chrome[i] == result["type"]) {
+            setKey('forum',team,i);
+          }
+        }
+      } else if (result["no"] == 143) {
+        for (var i=0; i<koishu.length; i++) {
+          if(koishu[i] == result["type"]) {
+            setKey('forum',team,i);
+          }
+        }
+      }
       // 技リストとか更新
-      inputChangeName(team,result["no"]);
+      inputChangeD(team,result["no"]);
       // Lvの更新
       document.getElementById('lv_' + team).value = result["lv"];
       //svのセット

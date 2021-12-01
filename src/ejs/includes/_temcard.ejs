@@ -17,12 +17,17 @@
   <select name="name" id="name33_<%= i %>">
     <%- include('data/_namelist.ejs') %>
   </select>
+  <div id="forumbox_<%= i %>" style="visibility: hidden;">
+    <select name="name" id="forum_<%= i %>">
+      <option value="0">-----</option>
+    </select>
+  </div>
   <p>Trate</p>
   <select name="trate" id="trate_<%= i %>">
     <option value="-----">-----</option>
   </select>
   <% for (var j = 0; j < 4; j++) { %>
-    <p>わざ</p>
+    <p>Technique</p>
     <select name="kibun<%= j %>" id="kibun_<%= j %>_<%= i %>">
       <option value="0">-----</option>
     </select>

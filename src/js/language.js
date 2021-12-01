@@ -71,6 +71,35 @@ function changetrate(lang, columntail) {
   // 日本語に変更
   // 名前
 }
+//
+function changeforum(lang, columntail) {
+  temno = document.getElementById("name33" + columntail).value;
+  if (temno == 4) {
+    typetemlist = chrome;
+  } else if (temno == 143) {
+    typetemlist = koishu;
+  } else {
+    return 1;
+  }
+  // 利用する言語を取得
+  if(lang == "JP") {
+    list = typelistn_j;
+  } else {
+    list = typelistn;
+  }
+  var forumset = document.getElementById("forum" + columntail);
+  // すべてのキーを確認
+  for(var state of forumset) {
+    insert_mozi = list[typetemlist[state.value]];
+    // 日本語訳があるかどうかの確認
+    // あったら書き換え innerText対応有無で対応を変える
+    if (typeof(state.innerText) != 'undefined') {
+      state.innerText = insert_mozi;
+    } else {
+      state.text = insert_mozi;
+    }
+  }
+}
 // 言語を変更するやつ
 function changeitem(lang, columntail) {
   tail = "";
@@ -94,6 +123,7 @@ function changeLangage(lang, tail){
     changetechnic(lang, tail);
     changetrate(lang, tail);
     changeitem(lang, tail);
+    changeforum(lang, tail);
 }
 // リスナー登録用
 function changeNamelistener(event) {

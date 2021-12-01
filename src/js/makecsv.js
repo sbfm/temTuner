@@ -1,6 +1,9 @@
-
 //const typeNameList = ["中立","風","地面","水","炎","みどり","電気","精神","デジタル","格闘","クリスタル","どく"];
 let typech = { none:0, Neutral:1, Wind:2, Earth:3, Water:4, Fire:5, Nature:6, Electric:7, Mental:8, Digital:9, Melee:10, Crystal:11, Toxic:12 };
+let typelistn = { 0:"none", 1:"Neutral", 2:"Wind", 3:"Earth", 4:"Water", 5:"Fire", 6:"Nature", 7:"Electric", 8:"Mental", 9:"Digital", 10:"Melee", 11:"Crystal", 12:"Toxic" };
+let typelistn_j = { 0:"なし", 1:"中立", 2:"風", 3:"地面", 4:"水", 5:"炎", 6:"みどり", 7:"電気", 8:"精神", 9:"デジタル", 10:"格闘", 11:"クリスタル", 12:"どく"};
+let chrome = [ 0, 1, 2, 3, 4, 5, 7, 8, 8, 10, 11, 12 ];
+let koishu = [ 0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12 ];
 let categoryList = {"Physical":0,"Special":1,"Status":2};
 function makeCSV() {
   csv = {version:2, monster:[], uiText:{}, option:{}};

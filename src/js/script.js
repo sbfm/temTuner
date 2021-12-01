@@ -17,6 +17,39 @@
 // ID 管理名
 // 名称・タイプ・ダメージ・STAコスト・ホールド・プライオリティ・ターゲット・追加効果
 // Synergy タイプ　ダメージ　コスト　ホールド　プライオリティ　ターゲット　Effects
+function setFolum(no,team) {
+  // 対象の番号かどうか
+  // 要素の削除
+  fl = document.getElementById('forum' + "_" + team);
+  // 要素を一旦空にする
+  while(fl.lastChild) { fl.removeChild(fl.lastChild); }
+  if (no == 4) {
+    // 要素の追加
+    for(var i=0; i<chrome.length; i++){
+      document.getElementById("forumbox" + "_" + team).style.visibility ="visible";
+      let op = document.createElement("option");
+      op.value = i;  
+      op.text = typelistn[String(chrome[i])]; 
+      fl.appendChild(op.cloneNode(true));
+    }
+  } else if (no == 143) {
+    // 要素の追加
+    for(var i=0; i<koishu.length; i++){
+      document.getElementById("forumbox" + "_" + team).style.visibility ="visible";
+      let op = document.createElement("option");
+      op.value = i;  // 特技の管理キー名
+      op.text = typelistn[String(koishu[i])];   //対応するタイプを引く
+      document.getElementById("forum" + "_" + team).appendChild(op.cloneNode(true));
+    }
+  } else {
+    let op = document.createElement("option");
+    op.value = 0;  
+    op.text = ""; 
+    fl.appendChild(op.cloneNode(true));
+    document.getElementById("forumbox" + "_" + team).style.visibility ="hidden";
+  }
+  return 1;
+}
 
 function updateTechnique(no,forum,team) {
   // 要素の削除
@@ -123,9 +156,22 @@ function upDateTotalliss(event){
   let team = event.target.eventParam;
   upDateTotal(team)
 }
-function inputChangeName(team,zukanNo){
+function inputChangeNameForum(team,zukanNo){
   // テクニックリストを更新する
-  updateTechnique(zukanNo, 0, team);
+  if(zukanNo == 3 || zukanNo == 143){
+    updateTechnique(zukanNo, document.getElementById('forum' + "_" + team).value, team);
+  } else {
+    updateTechnique(zukanNo, 0, team);
+  }
+  // 翻訳の設定を与える
+  changeLangage(document.getElementById("lang").value, "_" + team)
+  //document.getElementById("lang").addEventListener('change', changeNameTrigger);
+}
+function inputChangeName(team,zukanNo){
+  setFolum(zukanNo,team);
+  inputChangeD(team,zukanNo);
+}
+function inputChangeD(team,zukanNo){
   //レベルとSVとTVのリセット
   resetCard(team);
   //BSの更新
@@ -143,15 +189,19 @@ function inputChangeName(team,zukanNo){
       state.selected = false;
     }
   }
-  // 翻訳の設定を与える
-  changeLangage(document.getElementById("lang").value, "_" + team)
-  //document.getElementById("lang").addEventListener('change', changeNameTrigger);
+  inputChangeNameForum(team,zukanNo);
 }
 // -----------------------
 // temtemが更新されたときの処理
 // -----------------------
 function inputChange(event) {
   inputChangeName(event.target.eventParam, event.currentTarget.value);
+}
+// -----------------------
+// Forumが更新されたときの処理
+// -----------------------
+function inputChangeF(event) {
+  inputChangeNameForum(event.target.eventParam, document.getElementById('name33_' + event.target.eventParam).value);
 }
 
 // ----------------------
@@ -161,8 +211,12 @@ for(var team=0; team<8; team++){
   // 名前変更を感知
   let text = document.getElementById('name33' + "_" + team);
   text.addEventListener('change', inputChange);
-  // ステータス変更を感知
   text.eventParam = team;
+  // Forum変更を感知
+  let fo = document.getElementById('forum' + "_" + team);
+  fo.addEventListener('change', inputChangeF);
+  fo.eventParam = team;
+  // ステータス変更を感知
   document.getElementById('lv' + "_" + team).addEventListener('change', upDateTotalliss);
   document.getElementById('lv' + "_" + team).eventParam = team;
   document.getElementById('lv' + "_" + team).eventParam = team;
